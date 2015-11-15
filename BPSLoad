@@ -1,0 +1,75 @@
+var calculator_variables=
+{
+  input:
+  [
+    //input variables
+    {
+      vname :"Pe",
+      explain:"Pe,Equipment capacity",
+      fillvalue:  "100",
+      unit: "kW(s)"
+    },
+    {
+      vname: "Kd",
+      explain: "Kd,Need coefficient",
+      fillvalue: "0.72",
+      unit: "Multiple"
+    },
+    {
+      vname: "Deg",
+      explain: "Deg,Angle,for reactive power",
+      fillvalue: "30",
+      unit: "Deg"
+    },
+	{
+		vname:"Un",
+		explain:"Un,Voltage,normally 220v or 380v",
+		fillvalue:"220",
+		unit:"voltage"
+	},
+  ],
+  result:
+  [
+    {
+      vname:"Pc",
+      explain:"Pc,Computational active power",
+      formula:function(){
+        return Pe*Kd;
+      },
+      unit:"kw",
+      precision:2//2 digit beyond dot
+    },
+    {
+      vname:"Qc",
+      explain:"Qc,Computational reactive power",
+      formula:function(){
+        return Pe*Kd*Math.tan(Deg*Math.PI/180);
+      },
+      unit:"kvar",
+      precision:2//2 digit beyond dot
+    },
+	
+    {
+      vname:"Sc",
+      explain:"Sc,Computational apparent power",
+      formula:function(){
+        return Math.sqrt(Pc^2+Qc^2);
+      },
+      unit:"kVA",
+      precision:2//2 digit beyond dot
+    },
+	
+    {
+      vname:"Ic",
+      explain:"Ic,Current of computational power",
+      formula:function(){
+        return Sc/(Math.sqrt(3)*Un/1000);
+      },
+      unit:"A",
+      precision:2//2 digit beyond dot
+    },
+	
+  ],
+  introduction: "Online Calculator for Computational load building power support",
+  author:"Designed by Qin Yongliang,Modified by Jonah Weng,available on GitHub as \"OnlineCalculatorTemplate\""
+};
